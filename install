@@ -1,0 +1,91 @@
+#!/bin/sh
+
+# https://github.com/drebrb/dotfiles
+
+red='\033[0;31m'
+
+green='\033[0;32m'
+
+no_color='\033[0m'
+
+alacritty_dot_yml() {
+    if [ -e ~/.config/alacritty/ ]
+    then
+        if cp alacritty.yml ~/.config/alacritty/
+        then
+            f1="${green}alacritty.yml${no_color}"
+        else
+            f1="${red}alacritty.yml${no_color}"
+            return 1
+        fi
+    else
+        f1="${red}alacritty.yml${no_color}"
+        return 1
+    fi
+}
+
+init_dot_vim() {
+    if [ -e ~/.config/nvim/ ]
+    then
+        if cp init.vim ~/.config/nvim/
+        then
+            f2="${green}init.vim${no_color}"
+        else
+            f2="${red}init.vim${no_color}"
+            return 1
+        fi
+    else
+        f2="${red}init.vim${no_color}"
+        return 1
+    fi
+}
+
+dot_tmux_dot_conf() {
+    if cp .tmux.conf ~/
+    then
+        f3="${green}.tmux.conf${no_color}"
+    else
+        f3="${red}.tmux.conf${no_color}"
+        return 1
+    fi
+}
+
+dot_zshrc() {
+    if cp .zshrc ~/
+    then
+        f4="${green}.zshrc${no_color}"
+    else
+        f4="${red}.zshrc${no_color}"
+        return 1
+    fi
+}
+
+results() {
+    if [ "$ec1" -ne 0 ] || [ "$ec2" -ne 0 ] || [ "$ec3" -ne 0 ] || [ "$ec4" -ne 0 ]
+    then
+        printf "%s
+************************************
+***************${red}ERROR!${no_color}*************** 
+************************************
+
+   One or more failed to install.
+
+$f1
+$f3
+$f2
+$f4
+\n"
+    else
+        printf "%s
+************************************
+*******${green}INSTALLATION COMPLETE!${no_color}*******
+************************************
+\n"
+    fi
+}
+
+alacritty_dot_yml; ec1=$?
+init_dot_vim; ec2=$?
+dot_tmux_dot_conf; ec3=$?
+dot_zshrc; ec4=$?
+results
