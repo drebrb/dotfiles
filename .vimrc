@@ -1,7 +1,5 @@
 syntax on
 
-set guicursor=
-set termguicolors
 set nohlsearch
 set hidden
 set noerrorbells
@@ -27,4 +25,3 @@ call plug#end()
 
 colorscheme gruvbox
 set background=dark
-
