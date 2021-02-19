@@ -14,12 +14,12 @@ set nowrap
 set smartcase
 set noswapfile
 set nobackup
-set undodir=~/.config/nvim/undodir
+set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set colorcolumn=80
 
-call plug#begin('~/.config/nvim/autoload/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
 

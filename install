@@ -24,19 +24,13 @@ alacritty_dot_yml() {
     fi
 }
 
-init_dot_vim() {
-    if [ -e ~/.config/nvim/ ]
+dot_vimrc() {
+    if cp .vimrc ~/
     then
-        if cp init.vim ~/.config/nvim/
-        then
-            f2="${green}init.vim${no_color}"
-        else
-            f2="${red}init.vim${no_color}"
-            return 1
-        fi
+        f2="${green}.vimrc${no_color}"
     else
-        f2="${red}init.vim${no_color}"
-        return 1
+        f2="${red}.vimrc${no_color}"
+	return 1
     fi
 }
 
@@ -85,7 +79,7 @@ $f4
 }
 
 alacritty_dot_yml; ec1=$?
-init_dot_vim; ec2=$?
+dot_vimrc; ec2=$?
 dot_tmux_dot_conf; ec3=$?
 dot_zshrc; ec4=$?
 results
